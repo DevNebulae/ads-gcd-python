@@ -31,7 +31,7 @@ def reducefn(key, values):
 
     return result
 
-files = glob.glob('small/*.*')
+files = glob.glob('large/*.*')
 data = dict((file_contents(f).decode('latin1'), f) for f in files)
 
 s = mincemeat.Server()
