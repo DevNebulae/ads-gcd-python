@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import glob
+import timeit
 from functools import reduce
 import operator
 import mincemeat
@@ -31,6 +32,7 @@ def reducefn(key, values):
 
     return result
 
+start = timeit.default_timer()
 files = glob.glob('large/*.*')
 data = dict((file_contents(f).decode('latin1'), f) for f in files)
 
@@ -45,5 +47,8 @@ results = s.run_server(password="changeme")
 results = sorted(results.items(), key=operator.itemgetter(1), reverse=True)
 results = results[:10]
 
+stop = timeit.default_timer()
+
+print(stop - start)
 with open('results.txt', 'w') as f:
     f.write(str(results))
